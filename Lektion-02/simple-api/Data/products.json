@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "productName": "Eluttag",
+    "price": 12.95
+  },
+  {
+    "id": 2,
+    "productName": "Eluttag dubbelt",
+    "price": 16.95
+  },
+  {
+    "id": 3,
+    "productName": "Jordad kontakt",
+    "price": 22.95
+  }
+]
