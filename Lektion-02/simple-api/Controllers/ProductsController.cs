@@ -15,14 +15,19 @@ public class ProductsController : ControllerBase
     {
         _environment = environment;
         _path = string.Concat(_environment.ContentRootPath, "/Data/products.json");
-        Console.WriteLine(_environment);
     }
 
     [HttpGet()]
     public ActionResult ListProducts()
     {
         var products = Storage<Product>.ReadJson(_path);
-        return Ok(products);
+        return Ok(new
+        {
+            Success = true,
+            statusCode = "200",
+            items = products.Count,
+            Data = products
+        });
     }
 
     [HttpGet("{id}")]
@@ -31,15 +36,19 @@ public class ProductsController : ControllerBase
         var products = Storage<Product>.ReadJson(_path);
         Product product = products.SingleOrDefault(c => c.Id == id);
 
-        if (product is null) return NotFound("Hittade inget...");
+        if (product is null) return NotFound(new
+        {
+            Success = false,
+            StatusCode = 404,
+            Message = "Hittade inget!"
+        });
 
-        return Ok(product);
-    }
-
-    [HttpGet("search/{productName}")]
-    public ActionResult FindProductName(string productName)
-    {
-        return Ok();
+        return Ok(new
+        {
+            Success = true,
+            statusCode = "200",
+            Data = product
+        });
     }
 
     [HttpPost()]
@@ -48,19 +57,32 @@ public class ProductsController : ControllerBase
         var products = Storage<Product>.ReadJson(_path);
         products.Add(product);
         Storage<Product>.WriteJson(_path, products);
-        return StatusCode(201);
+        return CreatedAtAction(nameof(FindProduct), new { id = product.Id }, product);
     }
 
     [HttpPut("{id}")]
     public ActionResult UpdateProduct(int id, Product product)
     {
         // Logik som uppdaterar en produkt...
+        var products = Storage<Product>.ReadJson(_path);
+        var item = products.SingleOrDefault(c => c.Id == id);
+
+        if (item is null) return NotFound("Hittar inte!");
+
+        products.Remove(item);
+        products.Add(product);
+        Storage<Product>.WriteJson(_path, products);
+
         return NoContent();
     }
 
     [HttpDelete("{id}")]
     public ActionResult DeleteProduct(int id)
     {
+        var products = Storage<Product>.ReadJson(_path);
+        var item = products.SingleOrDefault(c => c.Id == id);
+        products.Remove(item);
+        Storage<Product>.WriteJson(_path, products);
         return NoContent();
     }
 
