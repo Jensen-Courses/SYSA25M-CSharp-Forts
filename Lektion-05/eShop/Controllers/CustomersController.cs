@@ -1,0 +1,87 @@
+using eShop.Data;
+using eShop.DTOs.Customers;
+using eShop.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace eShop.Controllers;
+
+[Route("api/customers")]
+[ApiController]
+public class CustomersController(EShopContext context) : ControllerBase
+{
+    [HttpGet()]
+    public async Task<ActionResult> ListAllCustomers()
+    {
+        var items = await context.Customers.ToListAsync();
+
+        List<GetAllCustomersDto> customers = [.. items
+            .Select(c => new GetAllCustomersDto()
+            {
+                CustomerId = c.CustomerId,
+                FirstName = c.FirstName,
+                LastName = c.LastName
+            })];
+
+        return Ok(new { Success = true, StatusCode = 200, Items = customers.Count, Data = customers });
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult> FindCustomer(int id)
+    {
+        Customer customer = await context.Customers.FindAsync(id);
+        if (customer is null) return NotFound(new { Message = "Hittade ingen kund" });
+
+        GetCustomerDto dto = new()
+        {
+            CustomerName = customer.FirstName + " " + customer.LastName,
+            Email = customer.Email
+        };
+
+        return Ok(new { Success = true, StatusCode = 200, Items = "Not defined", Data = dto });
+    }
+
+    [HttpPost()]
+    public async Task<ActionResult> AddCustomer(PostCustomerDto model)
+    {
+        Customer customer = new()
+        {
+            FirstName = model.FirstName,
+            LastName = model.LastName,
+            Email = model.Email
+        };
+
+        context.Customers.Add(customer);
+        await context.SaveChangesAsync();
+        return StatusCode(201, customer);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateCustomer(int id, PutCustomerDto model)
+    {
+        Customer customer = await context.Customers.FindAsync(id);
+        if (customer is null) return NotFound(new { Message = "Hittade ingen kund" });
+
+        customer.FirstName = model.FirstName;
+        customer.LastName = model.LastName;
+        customer.Email = model.Email;
+
+        await context.SaveChangesAsync();
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteCustomer(int id)
+    {
+        Customer customer = await context.Customers.FindAsync(id);
+
+        if (customer is not null)
+        {
+            context.Customers.Remove(customer);
+            await context.SaveChangesAsync();
+        }
+
+        return NoContent();
+    }
+}
+
