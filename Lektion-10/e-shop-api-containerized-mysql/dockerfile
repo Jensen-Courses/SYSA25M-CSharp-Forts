@@ -1,0 +1,31 @@
+# Hämta dotnet sdk för att kunna kompilera
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+
+# Skapa en arbetskatalog inuti linux avbilden.(För bygg och release)
+WORKDIR /app
+
+# Kopiera vår csproj fil till app katalogen
+COPY *.csproj ./
+
+# Hämta in alla beroenden...
+RUN dotnet restore
+
+# Kopiera resten av filerna
+COPY . .
+
+# Bygg och skapa en release build
+RUN dotnet publish -c Release -o Release
+
+# Hämta ifrån mcr runtime för dotnet
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+
+# Skapa en ny katalog i vår nya image
+WORKDIR /app
+
+# Kopiera ifrån build image in i runtime image
+COPY --from=build /app/Release .
+
+# Tala om vilken port som exponeras ifrån vårt API
+EXPOSE 8080
+
+ENTRYPOINT [ "dotnet","eShop.dll" ]
