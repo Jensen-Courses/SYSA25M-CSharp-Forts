@@ -1,0 +1,38 @@
+[
+  {
+    "supplierId": 1,
+    "supplierName": "Kobia",
+    "email": "kobia@gmail.com",
+    "phone": "031-1233444",
+    "address": "Gatan 1",
+    "postalCode": "44432",
+    "city": "Göteborg"
+  },
+  {
+    "supplierId": 2,
+    "supplierName": "KåKå",
+    "email": "kaka@gmail.com",
+    "phone": "010-222222",
+    "address": "Kullen 1",
+    "postalCode": "23422",
+    "city": "Lomma"
+  },
+  {
+    "supplierId": 3,
+    "supplierName": "Engelhardt",
+    "email": "engelhardt@gmail.com",
+    "phone": "031-444444",
+    "address": "Reningsverksgatan 10",
+    "postalCode": "42147",
+    "city": "Västra Frölunda"
+  },
+  {
+    "supplierId": 4,
+    "supplierName": "Skaftö Bageri",
+    "email": "skaftoskorpan.info@gmail.com",
+    "phone": "0303-555555",
+    "address": "Munkerödsvägen 15",
+    "postalCode": "44432",
+    "city": "Stenungsund"
+  }
+]

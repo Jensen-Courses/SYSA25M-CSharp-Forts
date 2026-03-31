@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql
+  eshop-api:
+    image: softtech-dev/eshop-api:latest
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__postgresdev=Server=postgres;Port=5432;User Id=postgres;Password=postgres;Database=eshopdb
+    ports:
+      - '5001:8080'
+    depends_on:
+      - postgres
+volumes:
+  pgdata:
