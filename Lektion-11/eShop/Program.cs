@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using eShop.Interfaces;
 using eShop.Repositories;
 using eShop.Mock;
+using eShop;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,8 @@ builder.Services.AddIdentityCore<User>(options =>
 // Registera vår TokenServer i dotnet's dependency lista...
 builder.Services.AddScoped<TokenService>();
 // Registrera övriga tjänster...
-builder.Services.AddScoped<ISupplierRepository, MockSupplier>();
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddControllers();
 // builder.Services.AddControllers(options =>
