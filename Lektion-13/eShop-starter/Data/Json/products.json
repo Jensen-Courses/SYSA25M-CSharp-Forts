@@ -1,0 +1,34 @@
+[
+  {
+    "itemNumber": "10",
+    "productName": "Original skorpan",
+    "price": 0.0,
+    "imageUrl": "Original.jpg",
+    "description": "En spröd och kardemumma doftande skorpa.",
+    "supplierId": 4
+  },
+  {
+    "itemNumber": "20",
+    "productName": "Mandel skorpan",
+    "price": 0.0,
+    "imageUrl": "Mandel.jpg",
+    "description": "En lyxig skorpa med smak av mandel",
+    "supplierId": 4
+  },
+  {
+    "itemNumber": "30",
+    "productName": "Osötade skorpan",
+    "price": 0.0,
+    "imageUrl": "Osötad.jpg",
+    "description": "En spröd skorpa utan socker eller sötningsmedel, men fylld med härliga fröer.",
+    "supplierId": 4
+  },
+  {
+    "itemNumber": "40",
+    "productName": "Saffrans skorpan",
+    "price": 0.0,
+    "imageUrl": "Saffran.jpg",
+    "description": "En spröd skorpa med doft och smak av saffran.",
+    "supplierId": 4
+  }
+]
