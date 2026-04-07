@@ -37,23 +37,36 @@ public class SuppliersController(IGenericRepository<Supplier> repo) : Controller
         }
     }
 
-    // [HttpPost()]
-    // public async Task<ActionResult> AddSupplier(PostSupplierDto supplier)
-    // {
-    //     try
-    //     {
-    //         if (await uow.SupplierRepository.AddSupplier(supplier))
-    //         {
-    //             await uow.Complete();
-    //             return StatusCode(201, supplier);
-    //         }
+    [HttpGet("name/{name}")]
+    public async Task<ActionResult> FindSupplierByName(string name)
+    {
+        try
+        {
+            var supplier = await repo.FindAsync(c => c.SupplierName.ToLower().Trim() == name.ToLower().Trim());
+            if (supplier is null) return NotFound("Hittade ingen leverantör");
 
-    //         return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
-    //     }
-    //     catch
-    //     {
-    //         return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
-    //     }
-    // }
+            return Ok(supplier);
+        }
+        catch
+        {
+            return NotFound("Hittade ingen leverantör");
+        }
+    }
+
+    [HttpPost()]
+    public async Task<ActionResult> AddSupplier(Supplier supplier)
+    {
+        try
+        {
+            repo.Add(supplier);
+            if (await repo.SaveAllAsync()) return StatusCode(201);
+
+            return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
+        }
+        catch
+        {
+            return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
+        }
+    }
 }
 

@@ -23,54 +23,59 @@ public class CustomersController(IGenericRepository<Customer> repo) : Controller
         return Ok(new { Success = true, StatusCode = 200, Items = 1, Data = customer });
     }
 
-    // [HttpPost()]
-    // public async Task<ActionResult> AddCustomer(PostCustomerDto model)
-    // {
-    //     try
-    //     {
-    //         if (await unitOfWork.CustomerRepository.AddCustomer(model))
-    //         {
-    //             await unitOfWork.Complete();
-    //             return StatusCode(201);
-    //         }
+    [HttpPost()]
+    public async Task<ActionResult> AddCustomer(Customer customer)
+    {
+        try
+        {
+            repo.Add(customer);
+            if (await repo.SaveAllAsync()) return StatusCode(201);
 
-    //         return StatusCode(500, "Ett server fel inträffade");
-    //     }
-    //     catch
-    //     {
-    //         return StatusCode(500, "Ett server fel inträffade");
-    //     }
-    // }
+            return StatusCode(500, "Ett server fel inträffade");
+        }
+        catch
+        {
+            return StatusCode(500, "Ett server fel inträffade");
+        }
+    }
 
-    // [HttpPut("{id}")]
-    // public async Task<ActionResult> UpdateCustomer(int id, PutCustomerDto model)
-    // {
-    //     if (await unitOfWork.CustomerRepository.UpdateCustomer(id, model))
-    //     {
-    //         await unitOfWork.Complete();
-    //         return NoContent();
-    //     }
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateCustomer(int id, Customer customer)
+    {
+        try
+        {
+            customer.Id = id;
+            repo.Update(customer);
 
-    //     return NoContent();
-    // }
+            if (await repo.SaveAllAsync()) return NoContent();
 
-    // [HttpDelete("{id}")]
-    // public async Task<ActionResult> DeleteCustomer(int id)
-    // {
-    //     try
-    //     {
-    //         if (await unitOfWork.CustomerRepository.DeleteCustomer(id))
-    //         {
-    //             await unitOfWork.Complete();
-    //             return NoContent();
-    //         }
+            return StatusCode(500, "Något server fel inträffade");
+        }
+        catch
+        {
+            return StatusCode(500, "Något server fel inträffade");
+        }
 
-    //         return StatusCode(500, "Ett server fel inträffade");
-    //     }
-    //     catch
-    //     {
-    //         return StatusCode(500, "Ett server fel inträffade");
-    //     }
-    // }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteCustomer(int id)
+    {
+        try
+        {
+            var customer = await repo.FindByIdAsync(id);
+            if (customer is null) return NotFound("Hittade inte kunden");
+
+            repo.Delete(customer);
+
+            if (await repo.SaveAllAsync()) return NoContent();
+
+            return StatusCode(500, "Ett server fel inträffade");
+        }
+        catch
+        {
+            return StatusCode(500, "Ett server fel inträffade");
+        }
+    }
 }
 

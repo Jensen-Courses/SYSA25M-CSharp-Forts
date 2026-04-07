@@ -1,13 +1,17 @@
+using AutoMapper;
+using eShop.Data;
 using eShop.DTOs.Products;
 using eShop.Entities;
 using eShop.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ZstdSharp.Unsafe;
 
 namespace eShop.Controllers;
 
 [Route("api/products")]
 [ApiController]
-public class ProductsController(IGenericRepository<Product> repo) : ControllerBase
+public class ProductsController(IGenericRepository<Product> repo, IMapper mapper) : ControllerBase
 {
     [HttpGet()]
     public async Task<ActionResult> ListAllProducts()
@@ -15,7 +19,8 @@ public class ProductsController(IGenericRepository<Product> repo) : ControllerBa
         try
         {
             var products = await repo.ListAllAsync();
-            return Ok(new { Success = true, StatusCode = 200, Items = products.Count, Data = products });
+            var productsDto = mapper.Map<IList<GetProductsDto>>(products);
+            return Ok(new { Success = true, StatusCode = 200, Items = products.Count, Data = productsDto });
         }
         catch
         {
@@ -38,11 +43,14 @@ public class ProductsController(IGenericRepository<Product> repo) : ControllerBa
     }
 
     [HttpPost()]
-    public async Task<ActionResult> AddProduct(Product product)
+    public async Task<ActionResult> AddProduct(PostProductDto model)
     {
         try
         {
+            var product = mapper.Map<Product>(model);
+
             repo.Add(product);
+
             if (await repo.SaveAllAsync())
             {
                 return StatusCode(201);
@@ -57,21 +65,22 @@ public class ProductsController(IGenericRepository<Product> repo) : ControllerBa
 
     }
 
-    // [HttpGet("product/{itemNumber}")]
-    // public async Task<ActionResult> FindProduct(string itemNumber)
-    // {
-    //     try
-    //     {
-    //         var product = await uow.ProductRepository.FindProduct(itemNumber);
-    //         if (product is null) return NotFound();
+    [HttpGet("product/{itemNumber}")]
+    public async Task<ActionResult> FindProduct(string itemNumber)
+    {
+        try
+        {
+            var product = await repo.FindAsync(c => c.ItemNumber == itemNumber);
 
-    //         return Ok(new { Success = true, StatusCode = 200, Items = 1, Data = product });
-    //     }
-    //     catch
-    //     {
-    //         return StatusCode(500, "Något server fel inträffade, vi kan tyvärr inte hitta produkten.");
-    //     }
-    // }
+            if (product is null) return NotFound();
+
+            return Ok(new { Success = true, StatusCode = 200, Items = 1, Data = product });
+        }
+        catch
+        {
+            return StatusCode(500, "Något server fel inträffade, vi kan tyvärr inte hitta produkten.");
+        }
+    }
 
 
 
