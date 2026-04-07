@@ -1,4 +1,5 @@
 using eShop.DTOs.Products;
+using eShop.Entities;
 using eShop.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,14 +7,14 @@ namespace eShop.Controllers;
 
 [Route("api/products")]
 [ApiController]
-public class ProductsController(IUnitOfWork uow) : ControllerBase
+public class ProductsController(IGenericRepository<Product> repo) : ControllerBase
 {
     [HttpGet()]
     public async Task<ActionResult> ListAllProducts()
     {
         try
         {
-            var products = await uow.ProductRepository.ListAllProducts();
+            var products = await repo.ListAllAsync();
             return Ok(new { Success = true, StatusCode = 200, Items = products.Count, Data = products });
         }
         catch
@@ -27,7 +28,7 @@ public class ProductsController(IUnitOfWork uow) : ControllerBase
     {
         try
         {
-            var product = await uow.ProductRepository.FindProduct(id);
+            var product = await repo.FindByIdAsync(id);
             return Ok(new { Success = true, StatusCode = 200, Items = 1, Data = product });
         }
         catch
@@ -36,81 +37,81 @@ public class ProductsController(IUnitOfWork uow) : ControllerBase
         }
     }
 
-    [HttpPost()]
-    public async Task<ActionResult> AddProduct(PostProductDto product)
-    {
-        try
-        {
-            if (await uow.ProductRepository.AddProduct(product))
-            {
-                await uow.Complete();
-                return StatusCode(201, product);
-            }
+    // [HttpPost()]
+    // public async Task<ActionResult> AddProduct(PostProductDto product)
+    // {
+    //     try
+    //     {
+    //         if (await uow.ProductRepository.AddProduct(product))
+    //         {
+    //             await uow.Complete();
+    //             return StatusCode(201, product);
+    //         }
 
-            return StatusCode(500, "Något server fel inträffade");
-        }
-        catch
-        {
-            return StatusCode(500, "Något server fel inträffade");
-        }
+    //         return StatusCode(500, "Något server fel inträffade");
+    //     }
+    //     catch
+    //     {
+    //         return StatusCode(500, "Något server fel inträffade");
+    //     }
 
-    }
+    // }
 
-    [HttpGet("product/{itemNumber}")]
-    public async Task<ActionResult> FindProduct(string itemNumber)
-    {
-        try
-        {
-            var product = await uow.ProductRepository.FindProduct(itemNumber);
-            if (product is null) return NotFound();
+    // [HttpGet("product/{itemNumber}")]
+    // public async Task<ActionResult> FindProduct(string itemNumber)
+    // {
+    //     try
+    //     {
+    //         var product = await uow.ProductRepository.FindProduct(itemNumber);
+    //         if (product is null) return NotFound();
 
-            return Ok(new { Success = true, StatusCode = 200, Items = 1, Data = product });
-        }
-        catch
-        {
-            return StatusCode(500, "Något server fel inträffade, vi kan tyvärr inte hitta produkten.");
-        }
-    }
+    //         return Ok(new { Success = true, StatusCode = 200, Items = 1, Data = product });
+    //     }
+    //     catch
+    //     {
+    //         return StatusCode(500, "Något server fel inträffade, vi kan tyvärr inte hitta produkten.");
+    //     }
+    // }
 
 
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateProduct(int id, PutProductDto product)
-    {
-        try
-        {
-            if (await uow.ProductRepository.UpdateProduct(id, product))
-            {
-                await uow.Complete();
-                return NoContent();
-            }
-            return StatusCode(500, "Något server fel inträffade");
-        }
-        catch
-        {
-            return StatusCode(500, "Något server fel inträffade");
-        }
+    // [HttpPut("{id}")]
+    // public async Task<ActionResult> UpdateProduct(int id, PutProductDto product)
+    // {
+    //     try
+    //     {
+    //         if (await uow.ProductRepository.UpdateProduct(id, product))
+    //         {
+    //             await uow.Complete();
+    //             return NoContent();
+    //         }
+    //         return StatusCode(500, "Något server fel inträffade");
+    //     }
+    //     catch
+    //     {
+    //         return StatusCode(500, "Något server fel inträffade");
+    //     }
 
-    }
+    // }
 
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> RemoveProduct(int id)
-    {
-        try
-        {
-            if (await uow.ProductRepository.DeleteProduct(id))
-            {
-                await uow.Complete();
-                return NoContent();
-            }
-            return StatusCode(500, "Ett server fel inträffade");
-        }
-        catch
-        {
-            return StatusCode(500, "Ett server fel inträffade");
-        }
+    // [HttpDelete("{id}")]
+    // public async Task<ActionResult> RemoveProduct(int id)
+    // {
+    //     try
+    //     {
+    //         if (await uow.ProductRepository.DeleteProduct(id))
+    //         {
+    //             await uow.Complete();
+    //             return NoContent();
+    //         }
+    //         return StatusCode(500, "Ett server fel inträffade");
+    //     }
+    //     catch
+    //     {
+    //         return StatusCode(500, "Ett server fel inträffade");
+    //     }
 
-    }
+    // }
 
 }
 

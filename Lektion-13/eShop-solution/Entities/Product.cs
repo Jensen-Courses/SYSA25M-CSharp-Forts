@@ -1,18 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 
 namespace eShop.Entities;
 
-public record Product
+public class Product : BaseEntity
 {
-    public int Id { get; set; }
     public int SupplierId { get; set; }
-    [NotNull]
-    public string ItemNumber { get; set; }
-    [NotNull]
-    public string ProductName { get; set; }
-    [NotNull]
-    public decimal Price { get; set; }
+    public required string ItemNumber { get; set; }
+    public required string ProductName { get; set; }
+    public required decimal Price { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
     [ForeignKey("SupplierId")]

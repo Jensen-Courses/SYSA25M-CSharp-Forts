@@ -1,4 +1,5 @@
 using eShop.DTOs.Suppliers;
+using eShop.Entities;
 using eShop.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,14 +7,14 @@ namespace eShop.Controllers;
 
 [Route("api/suppliers")]
 [ApiController]
-public class SuppliersController(IUnitOfWork uow) : ControllerBase
+public class SuppliersController(IGenericRepository<Supplier> repo) : ControllerBase
 {
     [HttpGet()]
     public async Task<ActionResult> ListAllSuppliers()
     {
         try
         {
-            List<GetSuppliersDto> suppliers = await uow.SupplierRepository.ListAllSuppliers();
+            var suppliers = await repo.ListAllAsync();
             return Ok(new { Success = true, StatusCode = 200, Items = suppliers.Count, Data = suppliers });
         }
         catch (Exception ex)
@@ -27,7 +28,7 @@ public class SuppliersController(IUnitOfWork uow) : ControllerBase
     {
         try
         {
-            GetSupplierDto supplier = await uow.SupplierRepository.FindSupplier(id);
+            var supplier = await repo.FindByIdAsync(id);
             return Ok(new { Success = true, StatusCode = 200, Items = 1, Data = supplier });
         }
         catch
@@ -36,23 +37,23 @@ public class SuppliersController(IUnitOfWork uow) : ControllerBase
         }
     }
 
-    [HttpPost()]
-    public async Task<ActionResult> AddSupplier(PostSupplierDto supplier)
-    {
-        try
-        {
-            if (await uow.SupplierRepository.AddSupplier(supplier))
-            {
-                await uow.Complete();
-                return StatusCode(201, supplier);
-            }
+    // [HttpPost()]
+    // public async Task<ActionResult> AddSupplier(PostSupplierDto supplier)
+    // {
+    //     try
+    //     {
+    //         if (await uow.SupplierRepository.AddSupplier(supplier))
+    //         {
+    //             await uow.Complete();
+    //             return StatusCode(201, supplier);
+    //         }
 
-            return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
-        }
-        catch
-        {
-            return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
-        }
-    }
+    //         return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
+    //     }
+    //     catch
+    //     {
+    //         return StatusCode(500, "Något gick när vi skulle spara ny leverantör");
+    //     }
+    // }
 }
 

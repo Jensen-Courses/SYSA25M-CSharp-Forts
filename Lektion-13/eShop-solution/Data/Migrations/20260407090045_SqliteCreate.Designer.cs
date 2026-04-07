@@ -11,7 +11,7 @@ using eShop.Data;
 namespace eShop.Data.Migrations
 {
     [DbContext(typeof(EShopContext))]
-    [Migration("20260331082906_SqliteCreate")]
+    [Migration("20260407090045_SqliteCreate")]
     partial class SqliteCreate
     {
         /// <inheritdoc />
@@ -245,14 +245,12 @@ namespace eShop.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ItemNumber")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("SupplierId")
@@ -286,7 +284,7 @@ namespace eShop.Data.Migrations
 
             modelBuilder.Entity("eShop.Entities.Supplier", b =>
                 {
-                    b.Property<int>("SupplierId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -297,21 +295,18 @@ namespace eShop.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SupplierName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("SupplierId");
+                    b.HasKey("Id");
 
                     b.ToTable("Suppliers");
                 });
