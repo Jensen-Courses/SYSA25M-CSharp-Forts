@@ -69,7 +69,7 @@ public class CustomerRepository(EShopContext context) : ICustomerRepository
         List<GetAllCustomersDto> customers = [.. items
             .Select(c => new GetAllCustomersDto()
             {
-                CustomerId = c.CustomerId,
+                CustomerId = c.Id,
                 FirstName = c.FirstName,
                 LastName = c.LastName
             })];

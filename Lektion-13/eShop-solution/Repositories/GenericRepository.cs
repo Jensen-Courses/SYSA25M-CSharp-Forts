@@ -9,12 +9,12 @@ public class GenericRepository<T>(EShopContext context) : IGenericRepository<T> 
 {
     public void Add(T entity)
     {
-        throw new NotImplementedException();
+        context.Set<T>().Add(entity);
     }
 
     public void Delete(T entity)
     {
-        throw new NotImplementedException();
+        context.Set<T>().Remove(entity);
     }
 
     public async Task<T> FindByIdAsync(int id)
@@ -29,6 +29,11 @@ public class GenericRepository<T>(EShopContext context) : IGenericRepository<T> 
 
     public void Update(T entity)
     {
-        throw new NotImplementedException();
+        context.Entry(entity).State = EntityState.Modified;
+    }
+
+    public async Task<bool> SaveAllAsync()
+    {
+        return await context.SaveChangesAsync() > 0;
     }
 }
