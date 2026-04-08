@@ -1,0 +1,52 @@
+[
+  {
+    "itemNumber": "202-1066",
+    "productName": "kolvstångscylinder, 3657868",
+    "imageUrl": "Festo-kolvstång.jpg",
+    "price": 2502.3,
+    "description": "Festo Pneumatisk kolvstångscylinder, 3657868 DSBC serien, Borrning 63 mm 125 mm, Dubbelverkandeeffektiv",
+    "type": "Piston rod cylinder",
+    "brand": "Festo",
+    "itemsInStock": 38
+  },
+  {
+    "itemNumber": "594-611",
+    "productName": "kolvstångscylinder, 63MP2C032A0300",
+    "imageUrl": "Festo-kolvstång.jpg",
+    "price": 1592.2,
+    "description": "Camozzi Pneumatisk kolvstångscylinder, 63MP2C032A0300 63 serien, Borrning 32 mm 300 mm",
+    "type": "Piston rod cylinder",
+    "brand": "Camozzi",
+    "itemsInStock": 32
+  },
+  {
+    "itemNumber": "613-210",
+    "productName": "kolvstångscylinder, 63MP2C032A0300",
+    "imageUrl": "Dubbel-riktad.jpg",
+    "price": 3961.89,
+    "description": "SMC Dubbelverkande cylinder 1500 mm, CG5EN63TFSV-250 CG5-S serien, Dubbelverkandeeffektiv",
+    "type": "Dubbelverkande cylinder",
+    "brand": "SMC",
+    "itemsInStock": 18
+  },
+  {
+    "itemNumber": "220-3678",
+    "productName": "Ställdon utan stång Dubbelverkande",
+    "imageUrl": "Lintra-plus.jpg",
+    "price": 37273.62,
+    "description": "Norgren Ställdon utan stång Dubbelverkande 600 mm 32 mm",
+    "type": "Dubbelverkande cylinder",
+    "brand": "Norgren",
+    "itemsInStock": 5
+  },
+  {
+    "itemNumber": "509-8030",
+    "productName": "Pneumatisk kompaktcylinder",
+    "imageUrl": "Kompakt.jpg",
+    "price": 922.66,
+    "description": "Norgren Pneumatisk kompaktcylinder RM/92000/M serien, Borrning 25 mm 20 mm, Dubbelverkandeeffektiv",
+    "type": "Dubbelverkande cylinder",
+    "brand": "Norgren",
+    "itemsInStock": 45
+  }
+]
