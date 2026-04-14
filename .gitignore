@@ -7,7 +7,7 @@
 .env
 
 # appsettings files
-**/appsettings.*
+# **/appsettings.*
 
 # User-specific files
 *.rsuser
