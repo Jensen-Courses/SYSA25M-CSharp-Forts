@@ -16,7 +16,7 @@ public class SeedDatabase()
         if (context.Products.Any()) return;
 
         // Läsa in json filen och skapa Supplier objekt...
-        var json = File.ReadAllText("Data/Json/products.json");
+        var json = File.ReadAllText("../infrastructure/Data/Json/products.json");
         var products = JsonSerializer.Deserialize<List<Product>>(json, options);
 
         if (products is not null && products.Count > 0)

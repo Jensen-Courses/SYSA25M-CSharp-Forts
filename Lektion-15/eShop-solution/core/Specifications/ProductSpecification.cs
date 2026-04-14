@@ -4,8 +4,9 @@ namespace core.Specifications;
 
 public class ProductSpecification : BaseSpecification<Product>
 {
-    public ProductSpecification(string? itemNumber, string? brand, string? sort) : base(
-        c => (string.IsNullOrWhiteSpace(itemNumber) || (c.ItemNumber == itemNumber)) &&
+    public ProductSpecification(string? itemNumber, string? brand, string? search, string? sort) : base(c =>
+        (string.IsNullOrEmpty(search) || c.ProductName.ToLower().Contains(search)) &&
+        (string.IsNullOrWhiteSpace(itemNumber) || (c.ItemNumber == itemNumber)) &&
         (string.IsNullOrWhiteSpace(brand) || (c.Brand.ToLower() == brand.ToLower())))
     {
         switch (sort)

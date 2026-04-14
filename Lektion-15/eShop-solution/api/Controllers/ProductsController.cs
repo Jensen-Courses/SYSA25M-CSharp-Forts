@@ -1,33 +1,71 @@
+using api.DTOs.Products;
+using AutoMapper;
+using core.Entities;
+using core.Interfaces;
+using core.Specifications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController() : ControllerBase
+    public class ProductsController(IGenericRepository<Product> repo, IMapper mapper) : ControllerBase
     {
         [HttpGet()]
-        public async Task<ActionResult> ListAllProducts(string? brand, string? sort)
+        public async Task<ActionResult> ListAllProducts(string? brand, string? search, string? sort)
         {
-            return Ok();
+            ProductSpecification spec;
+            if (search is not null)
+            {
+                spec = new ProductSpecification(itemNumber: null, brand: null, search, sort: null);
+            }
+            else
+            {
+                spec = new ProductSpecification(itemNumber: null, brand: null, search: null, sort: null);
+            }
+
+            var products = await repo.ListAsync(spec);
+            var productsDto = mapper.Map<IList<GetProductsDto>>(products);
+            return Ok(productsDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> FindProduct(int id)
+        public async Task<ActionResult> FindProduct(string id)
         {
-            return Ok();
+            var product = await repo.FindByIdAsync(id);
+            return Ok(product);
         }
 
         [HttpGet("product/{itemNumber}")]
-        public async Task<ActionResult> FindProduct(string itemNumber)
+        public async Task<ActionResult> FindProductByItemNumber(string itemNumber)
         {
-            return Ok();
+            var spec = new ProductSpecification(itemNumber, brand: null, search: null, sort: null);
+            var product = await repo.FindAsync(spec);
+
+            if (product is null) return NotFound();
+            return Ok(product);
         }
 
         [HttpPost()]
-        public async Task<ActionResult> AddProduct()
+        public async Task<ActionResult> AddProduct(PostProductDto model)
         {
-            return StatusCode(201);
+            try
+            {
+                var product = mapper.Map<Product>(model);
+
+                repo.Add(product);
+
+                if (await repo.SaveAllAsync())
+                {
+                    return StatusCode(201);
+                }
+
+                return StatusCode(500, "Något server fel inträffade");
+            }
+            catch
+            {
+                return StatusCode(500, "Något server fel inträffade");
+            }
         }
 
         [HttpPut("{id}")]
@@ -37,9 +75,23 @@ namespace api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteProduct(int id)
+        public async Task<ActionResult> DeleteProduct(string id)
         {
-            return NoContent();
+            try
+            {
+                var product = await repo.FindByIdAsync(id);
+                if (product is null) return BadRequest("Hittade ingen product");
+
+                repo.Delete(product);
+
+                if (await repo.SaveAllAsync()) return NoContent();
+
+                return StatusCode(500, "Ett server fel inträffade");
+            }
+            catch
+            {
+                return StatusCode(500, "Ett server fel inträffade");
+            }
         }
     }
 }
