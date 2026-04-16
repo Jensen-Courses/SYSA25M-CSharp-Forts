@@ -1,0 +1,1908 @@
+{
+  "info": {
+    "_postman_id": "a82b686e-15e5-4b1e-9b19-f73401d324fa",
+    "name": "E-Shop",
+    "description": "En samling av frågor för att testa vårt eshop api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19056603",
+    "_collection_link": "https://go.postman.co/collection/19056603-a82b686e-15e5-4b1e-9b19-f73401d324fa?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Cart queries",
+      "item": [
+        {
+          "name": "Add new cart item",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "",
+                  "pm.test(\"Should return 201 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(201);",
+                  "})",
+                  "",
+                  "pm.collectionVariables.set(\"productId\", jsonData.productId);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"customerId\": 6,\n    \"productId\": 3,\n    \"quantity\": 5,\n    \"price\": 3.95\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/carts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "carts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List all carts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 200 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(200);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/carts",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "carts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find cart",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/carts/1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "carts",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Customer queries",
+      "item": [
+        {
+          "name": "Add new customer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "",
+                  "pm.test(\"Should return 201 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(201);",
+                  "})",
+                  "",
+                  "pm.test(\"Response body contains expected properties\",()=>{",
+                  "    pm.expect(jsonData).to.haveOwnProperty(\"customerId\");",
+                  "    pm.expect(jsonData).to.haveOwnProperty(\"firstName\");",
+                  "    pm.expect(jsonData).to.haveOwnProperty(\"lastName\");",
+                  "    pm.expect(jsonData).to.haveOwnProperty(\"email\");",
+                  "    pm.expect(jsonData).to.haveOwnProperty(\"phone\");",
+                  "});",
+                  "",
+                  "// Hämta kund id och placera i en global variabel...",
+                  "pm.collectionVariables.set(\"customerId\",jsonData.customerId);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"Eva\",\n    \"lastName\": \"Nilsson\",\n    \"email\": \"eva@mail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/customers",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List all customers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return the statuscode 200\",()=>{",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/customers",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find customer by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 200 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(200);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/customers/1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "customers",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update customer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return the statuscode 204\",()=>{",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"Eva-Lena\",\n    \"lastName\": \"Nilsson\",\n    \"email\": \"eva-lena@mail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/customers/1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "customers",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove customer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 204 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(204);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/customers/1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "customers",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Display cart content",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/customers/6/cart/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "customers",
+                "6",
+                "cart",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List customer orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/customers/6/orders",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "customers",
+                "6",
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment queries",
+      "item": [
+        {
+          "name": "Pay order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/payments?customerId=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "payments"
+              ],
+              "query": [
+                {
+                  "key": "customerId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product queries",
+      "item": [
+        {
+          "name": "ListAllProducts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 200 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(200);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJoYW5uYUBtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJoYW5uYUBtYWlsLmNvbSIsIkZpcnN0TmFtZSI6Ikhhbm5hIiwiTGFzdE5hbWUiOiLDlmJlcmciLCJJZCI6ImFmOGE3NjU2LWEzNzAtNDg0Yy1hNzE1LWQ5MTU5ZmZhNmQwYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJleHAiOjE3NzQzNjA0NjZ9.vadI8juItMg5RlkO6-tMtyuUAQUBU8ATEO7bAPq5nShB8ddItEwWAYwZpn_LaGSdyZYggydZRM3Ced6iFCsEaw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add a new product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 201 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(201);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"itemNumber\": \"510-8030\",\n    \"name\": \"Pneumatisk kompaktcylinder Dubbelverkande\",\n    \"imageUrl\": \"Kompakt.jpg\",\n    \"price\": 1015.78,\n    \"description\": \"Norgren Pneumatisk kompaktcylinder RM/92000/M serien, Borrning 25 mm 20 mm, Dubbelverkandeeffektiv\",\n    \"type\": \"Dubbelverkande cylinder\",\n    \"brand\": \"SMC\",\n    \"itemsInStock\": 12\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/products",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find product by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 201 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(201);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products/50bf53d4e4a24075b945faccf2876721",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "50bf53d4e4a24075b945faccf2876721"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 204 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(204);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products/50bf53d4e4a24075b945faccf2876721",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "50bf53d4e4a24075b945faccf2876721"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 204 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(204);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"supplierId\": 1,\n    \"itemNumber\": \"80\",\n    \"productName\": \"Lingon skorpan updated\",\n    \"price\": 18.0,\n    \"imageUrl\": \"Lingon.jpg\",\n    \"description\": \"En spröd skorpa med doft och smak av lingon.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/products/5",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "products",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Patch product price",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 204 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(204);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"price\": 59.95\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/products/4",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "products",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find product by itemnumber",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 200 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(200);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products/product/509-8030",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "product",
+                "509-8030"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List products by brand",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/products?brands=festo,norgren",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "brands",
+                  "value": "festo,norgren"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Paged result",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/products?pageSize=2&pageNumber=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "2"
+                },
+                {
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Paged result with filter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/products?pageSize=2&pageNumber=1&brands=norgren",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "2"
+                },
+                {
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "key": "brands",
+                  "value": "norgren"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search by productname",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products?brand=norgren",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "brand",
+                  "value": "norgren"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Supplier queries",
+      "item": [
+        {
+          "name": "ListAllSuppliers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 200 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(200);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/suppliers",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "suppliers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add supplier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 201 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(201);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"supplierName\": \"Test AB 2\",\n    \"phone\": \"0303-666777\",\n    \"email\": \"test.info@gmail.com\",\n    \"address\": \"Gatan 15\",\n    \"postalCode\": \"44444\",\n    \"city\": \"Stenungsund\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/suppliers",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "suppliers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find supplier",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Should return 200 as statuscode\",()=>{",
+                  "    pm.response.to.have.status(200);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/suppliers/4",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "suppliers",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a supplier",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"supplierName\": \"Test AB\",\n\"address\": \"Gatan 25\",\n\"postalCode\": \"12345\",\n\"city\": \"Stenungsund\",\n\"phone\": \"0303-999888\",\n\"email\": \"test.info@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/suppliers/5",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "suppliers",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a supplier",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJoYW5uYUBtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJoYW5uYUBtYWlsLmNvbSIsIkZpcnN0TmFtZSI6Ikhhbm5hIiwiTGFzdE5hbWUiOiLDlmJlcmciLCJJZCI6ImFmOGE3NjU2LWEzNzAtNDg0Yy1hNzE1LWQ5MTU5ZmZhNmQwYiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJleHAiOjE3NzQzNjA0NjZ9.vadI8juItMg5RlkO6-tMtyuUAQUBU8ATEO7bAPq5nShB8ddItEwWAYwZpn_LaGSdyZYggydZRM3Ced6iFCsEaw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/suppliers/5",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "suppliers",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find supplier by name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/suppliers/name/kåkå",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "suppliers",
+                "name",
+                "kåkå"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authentication queries",
+      "item": [
+        {
+          "name": "Register user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "",
+                  "pm.globals.set(\"token\",jsonData.token)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"hanna@mail.com\",\n    \"password\": \"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "",
+                  "pm.globals.set(\"token\",jsonData.token)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"hanna@mail.com\",\n    \"password\": \"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/auth/role?roleName=User",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "role"
+              ],
+              "query": [
+                {
+                  "key": "roleName",
+                  "value": "User"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add user to role",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/auth/userrole?userName=hanna@mail.com&roleName=Admin",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "userrole"
+              ],
+              "query": [
+                {
+                  "key": "userName",
+                  "value": "hanna@mail.com"
+                },
+                {
+                  "key": "roleName",
+                  "value": "Admin"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login with cookies",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"hanna@mail.com\",\n    \"password\": \"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}login?useCookies=true",
+              "host": [
+                "{{url}}login"
+              ],
+              "query": [
+                {
+                  "key": "useCookies",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register Erik",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\":\"Erik\",\n    \"lastName\": \"Eriksson\",\n    \"email\":\"erik@mail.com\",\n    \"password\": \"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/account/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "account",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Erik",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"erik@mail.com\",\n    \"password\": \"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Erik with cookies",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"erik@mail.com\",\n    \"password\": \"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/login?useCookies=true",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ],
+              "query": [
+                {
+                  "key": "useCookies",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get current user info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/account/user-info",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "account",
+                "user-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/account/logout",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "account",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Error tests",
+      "item": [
+        {
+          "name": "Get Unauthorized",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/bad/unauthorized",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "bad",
+                "unauthorized"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Notfound",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/bad/notfound",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "bad",
+                "notfound"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Bad Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/bad/badrequest",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "bad",
+                "badrequest"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Internal server error",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/bad/internalerror",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "bad",
+                "internalerror"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Validation error",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/bad/validationerror",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "bad",
+                "validationerror"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check for CORS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"CORS header is present\",function(){",
+                  "    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+                  "    pm.expect(pm.response.headers.get(\"Access-Control-Allow-Origin\")).to.equal(\"http://localhost:3000\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/products",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Test authorization",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/test/authorized",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "test",
+                "authorized"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Lektion 16 - Paginering och kundinloggning",
+      "item": [
+        {
+          "name": "Get Products by brand",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products?brands=smc,festo",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "brands",
+                  "value": "smc,festo"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Products by search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products?search=don",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "don"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Paged Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products?pageSize=2&page=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "2"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register user - part one",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"testuser@mail.com\",\n    \"password\":\"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login user - part one",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"testuser@mail.com\",\n    \"password\":\"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login user with cookie - part one",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\":\"testuser@mail.com\",\n    \"password\":\"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/login?useCookies=true",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "login"
+              ],
+              "query": [
+                {
+                  "key": "useCookies",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register Hanna",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\":\"Hanna\",\n    \"lastName\":\"Eriksson\",\n    \"email\":\"hanna@mail.com\",\n    \"password\":\"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/accounts/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Hanna",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Hanna with cookie",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"hanna@mail.com\",\n    \"password\": \"Pa$$w0rd\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/login?useCookies=true",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "login"
+              ],
+              "query": [
+                {
+                  "key": "useCookies",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Call secure endpoint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/test/secure",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "test",
+                "secure"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get current user info",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/accounts/user-info",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "user-info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/accounts/logout",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register user with problems",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\":\"Hanna\",\n    \"lastName\":\"Eriksson\",\n    \"email\":\"hanna@mail.com\",\n    \"password\":\"password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/accounts/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add address - Hanna",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"addressLine\": \"Citronfjärilsvägen 3\",\n    \"postalCode\": \"44446\",\n    \"city\": \"Stenungsund\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/accounts/address",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "accounts",
+                "address"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product by itemnumber",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/products?itemNumber=220-3678",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "itemNumber",
+                  "value": "220-3678"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Lektion 17",
+      "item": [
+        {
+          "name": "Get Cart",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/cart?id=cart1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "cart"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "cart1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Cart",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"cart1\",\n    \"items\":[\n        {\n            \"itemNumber\": \"509-8030\",\n            \"productName\": \"Pneumatisk kompaktcylinder\",\n            \"imageUrl\": \"Kompakt.jpg\",\n            \"price\": 922.66,\n            \"quantity\": 1,\n            \"type\": \"Dubbelverkande cylinder\",\n            \"brand\": \"Norgren\",\n            \"productId\": \"d7c8333fb1024cd791cde2cb1c0aa246\"\n        }\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/api/cart",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Cart",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/api/cart?id=cart1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "api",
+                "cart"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "cart1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
