@@ -1,4 +1,5 @@
 using api.Helpers;
+using core.Entities;
 using core.Interfaces;
 using infrastructure.Data;
 using infrastructure.Repositories;
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<EShopContext>(options =>
 
 // DI...
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddAuthorization();
+// Aktivera IdentityApi endpoints...
+builder.Services.AddIdentityApiEndpoints<AppUser>()
+    .AddEntityFrameworkStores<EShopContext>();
 
 builder.Services.AddAutoMapper(options =>
 {
@@ -28,6 +33,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.MapControllers();
+
+// Ge oss tillgång till MapApi Endpoints...
+app.MapGroup("api").MapIdentityApi<AppUser>();
 
 // Seed database...
 try
