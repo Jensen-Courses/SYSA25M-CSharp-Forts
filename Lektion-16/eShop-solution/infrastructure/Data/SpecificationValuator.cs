@@ -22,6 +22,11 @@ public class SpecificationValuator<T> where T : BaseEntity
             query = query.OrderByDescending(spec.OrderByDescending);
         }
 
+        if (spec.IsPaginationActivated)
+        {
+            query = query.Skip(spec.Skip).Take(spec.Take);
+        }
+
         return query;
     }
 }

@@ -13,6 +13,12 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? predicate) : ISpeci
 
     public Expression<Func<T, object>>? OrderByDescending { get; private set; }
 
+    public int Skip { get; private set; }
+
+    public int Take { get; private set; }
+
+    public bool IsPaginationActivated { get; private set; }
+
     protected void UserOrderByAscending(Expression<Func<T, object>> orderByAscExpression)
     {
         OrderByAscending = orderByAscExpression;
@@ -23,4 +29,19 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? predicate) : ISpeci
         OrderByDescending = orderByDescExpression;
     }
 
+    protected void ApplyPagination(int take, int skip)
+    {
+        Take = take;
+        Skip = skip;
+        IsPaginationActivated = true;
+    }
+
+    public IQueryable<T> ApplyPredicate(IQueryable<T> query)
+    {
+        if (Predicate is not null)
+        {
+            query = query.Where(Predicate);
+        }
+        return query;
+    }
 }

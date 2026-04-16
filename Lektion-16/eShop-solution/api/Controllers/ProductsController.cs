@@ -7,16 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController(IGenericRepository<Product> repo, IMapper mapper) : ControllerBase
+    public class ProductsController(IGenericRepository<Product> repo, IMapper mapper) : ApiBaseController
     {
         [HttpGet()]
         public async Task<ActionResult> ListAllProducts([FromQuery] ProductSpecificationParams args)
         {
             var spec = new ProductSpecification(args);
-            var result = await repo.ListAsync(spec);
-            return Ok(result);
+            return await CreatePagedResult(repo, spec, args.PageNumber, args.PageSize);
         }
 
         [HttpGet("{id}")]

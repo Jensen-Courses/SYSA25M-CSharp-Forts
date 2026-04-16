@@ -9,6 +9,9 @@ public class ProductSpecification : BaseSpecification<Product>
         (string.IsNullOrWhiteSpace(args.ItemNumber) || (c.ItemNumber == args.ItemNumber)) &&
         (!args.Brands.Any() || args.Brands.Contains(c.Brand.ToLower())))
     {
+        // Paging...
+        ApplyPagination(args.PageSize, args.PageSize * (args.PageNumber - 1));
+
         switch (args.Sort)
         {
             case "priceAsc":

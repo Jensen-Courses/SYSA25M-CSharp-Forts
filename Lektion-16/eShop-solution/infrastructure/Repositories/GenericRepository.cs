@@ -52,4 +52,10 @@ public class GenericRepository<T>(EShopContext context) : IGenericRepository<T> 
         return SpecificationValuator<T>.CreateQuery(context.Set<T>().AsQueryable(), spec);
     }
 
+    public async Task<int> CountAsync(ISpecification<T> spec)
+    {
+        var query = context.Set<T>().AsQueryable();
+        query = spec.ApplyPredicate(query);
+        return await query.CountAsync();
+    }
 }
