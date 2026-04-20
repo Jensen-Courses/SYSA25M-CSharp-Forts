@@ -4,7 +4,6 @@ namespace api.DTOs.Products;
 
 public class PostProductDto
 {
-    public int SupplierId { get; set; }
     [Required]
     public string ItemNumber { get; set; } = string.Empty;
     [Required]
