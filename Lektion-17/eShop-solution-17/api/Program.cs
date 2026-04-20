@@ -3,7 +3,9 @@ using core.Entities;
 using core.Interfaces;
 using infrastructure.Data;
 using infrastructure.Repositories;
+using infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,19 @@ builder.Services.AddDbContext<EShopContext>(options =>
 
 // DI...
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Konfigurera Redis...
+builder.Services.AddSingleton<IConnectionMultiplexer>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("redis") ??
+        throw new Exception("Hittade ingen anslutning till redis");
+    var configuration = ConfigurationOptions.Parse(connectionString, true);
+    return ConnectionMultiplexer.Connect(configuration);
+});
+
+builder.Services.AddSingleton<ICartService, CartService>();
+
 builder.Services.AddAuthorization();
 // Aktivera IdentityApi endpoints...
 builder.Services.AddIdentityApiEndpoints<AppUser>()

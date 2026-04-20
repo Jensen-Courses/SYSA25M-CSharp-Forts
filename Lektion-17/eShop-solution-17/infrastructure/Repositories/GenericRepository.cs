@@ -37,11 +37,6 @@ public class GenericRepository<T>(EShopContext context) : IGenericRepository<T> 
         context.Entry(entity).State = EntityState.Modified;
     }
 
-    public async Task<bool> SaveAllAsync()
-    {
-        return await context.SaveChangesAsync() > 0;
-    }
-
     public async Task<T?> FindAsync(ISpecification<T> spec)
     {
         return await ApplySpecification(spec).FirstOrDefaultAsync();

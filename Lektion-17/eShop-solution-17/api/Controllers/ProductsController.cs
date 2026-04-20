@@ -8,21 +8,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
     public class ProductsController(
-            IGenericRepository<Product> repo,
-            IGenericRepository<Supplier> supplierRepo,
-            IMapper mapper) : ApiBaseController
+            IUnitOfWork uow, IMapper mapper) : ApiBaseController
     {
         [HttpGet()]
         public async Task<ActionResult> ListAllProducts([FromQuery] ProductSpecificationParams args)
         {
             var spec = new ProductSpecification(args);
-            return await CreatePagedResult(repo, spec, args.PageNumber, args.PageSize);
+            return await CreatePagedResult(uow.Repository<Product>(), spec, args.PageNumber, args.PageSize);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult> FindProduct(string id)
         {
-            var product = await repo.FindByIdAsync(id);
+            var product = await uow.Repository<Product>().FindByIdAsync(id);
             return Ok(product);
         }
 
@@ -43,15 +41,15 @@ namespace api.Controllers
                 var supplierSpec = new SupplierSpecification(supplierArgs);
 
                 // Hämta leverantörer ifrån databasen...
-                var supplier = await supplierRepo.FindAsync(supplierSpec);
+                var supplier = await uow.Repository<Supplier>().FindAsync(supplierSpec);
 
                 if (supplier is null) return BadRequest($"Ingen leverantör hittades med namnet {model.Brand}");
 
                 product.Supplier = supplier;
 
-                repo.Add(product);
+                uow.Repository<Product>().Add(product);
 
-                if (await repo.SaveAllAsync())
+                if (await uow.Complete())
                 {
                     return StatusCode(201);
                 }
@@ -75,12 +73,12 @@ namespace api.Controllers
         {
             try
             {
-                var product = await repo.FindByIdAsync(id);
+                var product = await uow.Repository<Product>().FindByIdAsync(id);
                 if (product is null) return BadRequest("Hittade ingen product");
 
-                repo.Delete(product);
+                uow.Repository<Product>().Delete(product);
 
-                if (await repo.SaveAllAsync()) return NoContent();
+                if (await uow.Complete()) return NoContent();
 
                 return StatusCode(500, "Ett server fel inträffade");
             }

@@ -7,22 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers;
 
-public class SuppliersController(IGenericRepository<Supplier> repo, IMapper mapper) : ApiBaseController
+public class SuppliersController(IUnitOfWork uow, IMapper mapper) : ApiBaseController
 {
     [HttpGet]
     public async Task<ActionResult> ListAllSuppliers([FromQuery] SupplierSpecificationParams args)
     {
         var spec = new SupplierSpecification(args);
-        return await CreatePagedResult(repo, spec, args.PageNumber, args.PageSize);
+        return await CreatePagedResult(uow.Repository<Supplier>(), spec, args.PageNumber, args.PageSize);
     }
 
     [HttpPost]
     public async Task<ActionResult> AddSupplier(PostSupplierDto model)
     {
         var supplier = mapper.Map<Supplier>(model);
-        repo.Add(supplier);
+        uow.Repository<Supplier>().Add(supplier);
 
-        if (await repo.SaveAllAsync())
+        if (await uow.Complete())
         {
             return StatusCode(201);
         }
@@ -35,9 +35,9 @@ public class SuppliersController(IGenericRepository<Supplier> repo, IMapper mapp
     {
         var supplier = mapper.Map<Supplier>(model);
         supplier.Id = id;
-        repo.Update(supplier);
+        uow.Repository<Supplier>().Update(supplier);
 
-        if (!await repo.SaveAllAsync()) return BadRequest("Couldn't update supplier");
+        if (!await uow.Complete()) return BadRequest("Couldn't update supplier");
 
         return NoContent();
     }
