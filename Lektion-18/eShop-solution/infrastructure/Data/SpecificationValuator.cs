@@ -30,6 +30,9 @@ public class SpecificationValuator<T> where T : BaseEntity
 
         query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 
+        query = spec.NestedIncludes.Aggregate(query, (current, include) =>
+            current.Include(include));
+
         return query;
     }
 }

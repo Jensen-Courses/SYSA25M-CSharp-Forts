@@ -10,7 +10,6 @@ public interface ISpecification<T>
     List<Expression<Func<T, object>>> Includes { get; }
     List<string> NestedIncludes { get; }
 
-    // Paginerings egenskaper...
     int Skip { get; }
     int Take { get; }
     bool IsPaginationActivated { get; }

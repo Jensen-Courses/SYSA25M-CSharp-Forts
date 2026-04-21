@@ -88,6 +88,6 @@ public class OrdersController(ICartService cartService, IUnitOfWork uow) : ApiBa
         var spec = new OrderSpecification(User.GetUserEmail(), id);
         var order = await uow.Repository<Order>().FindAsync(spec);
         if (order is null) return NotFound();
-        return Ok(order);
+        return Ok(order.ToDTO());
     }
 }
