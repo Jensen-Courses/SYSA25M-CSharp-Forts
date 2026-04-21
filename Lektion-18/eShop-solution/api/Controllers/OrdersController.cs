@@ -77,12 +77,17 @@ public class OrdersController(ICartService cartService, IUnitOfWork uow) : ApiBa
     {
         var spec = new OrderSpecification(User.GetUserEmail());
         var orders = await uow.Repository<Order>().ListAsync(spec);
-        return Ok(orders);
+
+        var result = orders.Select(c => c.ToDTO()).ToList();
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult> GetOrderById(string id)
     {
-        return Ok();
+        var spec = new OrderSpecification(User.GetUserEmail(), id);
+        var order = await uow.Repository<Order>().FindAsync(spec);
+        if (order is null) return NotFound();
+        return Ok(order);
     }
 }

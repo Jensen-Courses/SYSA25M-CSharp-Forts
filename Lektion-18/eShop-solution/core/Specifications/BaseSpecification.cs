@@ -20,13 +20,17 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? predicate) : ISpeci
     public bool IsPaginationActivated { get; private set; }
 
     public List<Expression<Func<T, object>>> Includes { get; } = [];
+    // För ThenInclude...
+    public List<string> NestedIncludes { get; } = [];
 
-    // c => c.Supplier
-    // o => o.OrderItem
-    // oi => oi.Product
     protected void AddInclude(Expression<Func<T, object>> includeExpression)
     {
         Includes.Add(includeExpression);
+    }
+
+    protected void AddInclude(string includeString)
+    {
+        NestedIncludes.Add(includeString);
     }
 
     protected void UseOrderByAscending(Expression<Func<T, object>> orderByAscExpression)

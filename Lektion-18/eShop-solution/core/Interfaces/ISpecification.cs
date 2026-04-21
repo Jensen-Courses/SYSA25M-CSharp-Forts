@@ -8,6 +8,8 @@ public interface ISpecification<T>
     Expression<Func<T, object>>? OrderByAscending { get; }
     Expression<Func<T, object>>? OrderByDescending { get; }
     List<Expression<Func<T, object>>> Includes { get; }
+    List<string> NestedIncludes { get; }
+
     // Paginerings egenskaper...
     int Skip { get; }
     int Take { get; }
