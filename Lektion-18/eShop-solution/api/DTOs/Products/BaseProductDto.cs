@@ -1,9 +1,11 @@
-﻿namespace api.DTOs.Products;
+﻿using core.Entities;
+
+namespace api.DTOs.Products;
 
 public class BaseProductDto
 {
-    public string? ItemNumber { get; set; }
+    public required string ItemNumber { get; set; }
     public string? Name { get; set; }
-    public string? Brand { get; set; }
+    public required string SupplierName { get; set; }
     public decimal Price { get; set; }
 }

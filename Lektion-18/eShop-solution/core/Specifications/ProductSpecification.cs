@@ -26,4 +26,9 @@ public class ProductSpecification : BaseSpecification<Product>
                 break;
         }
     }
+
+    public ProductSpecification(string id) : base(c => c.Id == id)
+    {
+        AddInclude(c => c.Supplier!);
+    }
 }

@@ -11,4 +11,5 @@ public interface IGenericRepository<T> where T : BaseEntity
     void Update(T entity);
     void Delete(T entity);
     Task<int> CountAsync(ISpecification<T> spec);
+    bool CheckIfExists(string id);
 }

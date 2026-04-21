@@ -53,4 +53,9 @@ public class GenericRepository<T>(EShopContext context) : IGenericRepository<T> 
         query = spec.ApplyPredicate(query);
         return await query.CountAsync();
     }
+
+    public bool CheckIfExists(string id)
+    {
+        return context.Set<T>().Any(x => x.Id == id);
+    }
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    public class TestController : ApiBaseController
+    public class TestController() : ApiBaseController
     {
         [Authorize()]
         [HttpGet("secure")]

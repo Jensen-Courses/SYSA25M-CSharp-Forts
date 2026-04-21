@@ -17,7 +17,7 @@ public class PostProductDto
     [Required]
     public string Type { get; set; } = string.Empty;
     [Required]
-    public string Brand { get; set; } = string.Empty;
+    public string SupplierName { get; set; } = string.Empty;
     [Range(1, int.MaxValue, ErrorMessage = "Antal i lager måste vara minst 1")]
     public int ItemsInStock { get; set; }
 }

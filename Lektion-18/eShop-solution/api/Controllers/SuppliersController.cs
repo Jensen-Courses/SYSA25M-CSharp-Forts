@@ -13,7 +13,8 @@ public class SuppliersController(IUnitOfWork uow, IMapper mapper) : ApiBaseContr
     public async Task<ActionResult> ListAllSuppliers([FromQuery] SupplierSpecificationParams args)
     {
         var spec = new SupplierSpecification(args);
-        return await CreatePagedResult(uow.Repository<Supplier>(), spec, args.PageNumber, args.PageSize);
+        var result = await uow.Repository<Supplier>().ListAsync(spec);
+        return await CreatePagedResult(uow.Repository<Supplier>(), spec, args.PageNumber, args.PageSize, result);
     }
 
     [HttpPost]
