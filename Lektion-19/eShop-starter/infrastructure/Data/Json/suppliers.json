@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Festo",
+    "phone": "12345678",
+    "customerNumber": 20001,
+    "webSite": "https://www.festo.com/se/en/",
+    "id": "565300292c484620bbc3e210b2e8637b"
+  },
+  {
+    "name": "Norgren",
+    "phone": "12345678",
+    "customerNumber": 10001,
+    "webSite": "https://www.norgren.com/en",
+    "id": "23cb1e749d9b4955a4c4bc9af582abee"
+  },
+  {
+    "name": "Camozzi",
+    "phone": "12345678",
+    "customerNumber": 11011,
+    "webSite": "https://se.automation.camozzi.com/",
+    "id": "db2ae0dae64140689e5de6121ca46d27"
+  },
+  {
+    "name": "Fim",
+    "phone": "12345678",
+    "customerNumber": 31011,
+    "webSite": "https://www.fimvalvole.com/en/",
+    "id": "09df89cee12648609d745a1dcb1e5f63"
+  },
+  {
+    "name": "SMC",
+    "phone": "12345678",
+    "customerNumber": 51011,
+    "webSite": "https://www.smc.eu/sv-se",
+    "id": "50df25363cfe4174868d8991f34f3fe3"
+  }
+]
