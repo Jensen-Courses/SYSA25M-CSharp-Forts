@@ -9,9 +9,9 @@ public class Order : BaseEntity
     public List<OrderItem> OrderItems { get; set; } = [];
     public DeliveryMethod DeliveryMethod { get; set; } = null!;
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
-    public double SubTotal { get; set; }
+    public decimal SubTotal { get; set; }
 
-    public double GetTotalAmount()
+    public decimal GetTotalAmount()
     {
         return SubTotal + DeliveryMethod.Price; //moms osv...
     }

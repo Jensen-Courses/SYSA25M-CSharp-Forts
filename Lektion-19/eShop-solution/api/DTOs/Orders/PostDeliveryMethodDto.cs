@@ -11,5 +11,5 @@ public class PostDeliveryMethodDto
     [Required]
     public required string Description { get; set; }
     [Required]
-    public double Price { get; set; } = 0.00;
+    public decimal Price { get; set; } = 0.00M;
 }

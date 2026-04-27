@@ -39,10 +39,10 @@ public class OrderDto
     public required string CustomerEmail { get; set; }
     public required ShippingAddress ShippingAddress { get; set; }
     public required string DeliveryMethod { get; set; }
-    public double ShippingPrice { get; set; }
+    public decimal ShippingPrice { get; set; }
     public required PaymentInfo PaymentInfo { get; set; }
     public required List<OrderItemDto> OrderItems { get; set; }
-    public double SubTotal { get; set; }
+    public decimal SubTotal { get; set; }
     public required string Status { get; set; }
 }
 
@@ -50,6 +50,6 @@ public class OrderItemDto
 {
     public required string ProductId { get; set; }
     public required string ProductName { get; set; }
-    public double Price { get; set; }
+    public decimal Price { get; set; }
     public int Quantity { get; set; }
 }
