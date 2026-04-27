@@ -20,16 +20,5 @@ public class EShopContext(DbContextOptions options) : IdentityDbContext<AppUser>
         base.OnModelCreating(builder);
 
         builder.ApplyConfigurationsFromAssembly(typeof(ProductConfiguration).Assembly);
-
-        builder.Entity<Order>().OwnsOne(c => c.ShippingAddress);
-        builder.Entity<Order>().OwnsOne(c => c.PaymentInfo);
-        builder.Entity<Order>().HasMany(c => c.OrderItems).WithOne().OnDelete(DeleteBehavior.Cascade);
-        builder.Entity<Order>().Property(c => c.Status).HasConversion(o => o.ToString(), o => Enum.Parse<OrderStatus>(o));
-        builder.Entity<Order>().Property(c => c.OrderDate).HasConversion(
-            c => c.ToUniversalTime(),
-            c => DateTime.SpecifyKind(c, DateTimeKind.Utc)
-        );
-
-        builder.Entity<OrderItem>().OwnsOne(c => c.ItemOrdered, i => i.WithOwner());
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Reflection;
+using System.Text.Json;
 using core.Entities;
 
 namespace infrastructure.Data;
@@ -12,9 +13,10 @@ public class SeedDatabase()
 
     public static async Task SeedSuppliers(EShopContext contex)
     {
+        var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         if (contex.Suppliers.Any()) return;
 
-        var json = File.ReadAllText("../Infrastructure/Data/Json/suppliers.json");
+        var json = File.ReadAllText(path + @"/Data/Json/suppliers.json");
         var suppliers = JsonSerializer.Deserialize<List<Supplier>>(json, options);
 
         if (suppliers is not null)
@@ -26,11 +28,12 @@ public class SeedDatabase()
 
     public static async Task SeedProducts(EShopContext context)
     {
+        var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         // Titta om vi redan har leverantörer i databasen...
         if (context.Products.Any()) return;
 
         // Läsa in json filen och skapa Supplier objekt...
-        var json = File.ReadAllText("../infrastructure/Data/Json/products.json");
+        var json = File.ReadAllText(path + @"/Data/Json/products.json");
         var products = JsonSerializer.Deserialize<List<Product>>(json, options);
 
         if (products is not null && products.Count > 0)

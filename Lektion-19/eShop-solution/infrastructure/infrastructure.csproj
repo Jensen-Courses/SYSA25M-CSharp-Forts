@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <None Include="Data\Json\**" CopyToOutputDirectory="PreserveNewest" />  
     <ProjectReference Include="..\core\core.csproj" />
   </ItemGroup>
 
@@ -11,10 +12,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.5" />
     <PackageReference Include="StackExchange.Redis" Version="2.12.14" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Config/" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -12,8 +12,8 @@ using infrastructure.Data;
 namespace infrastructure.Migrations
 {
     [DbContext(typeof(EShopContext))]
-    [Migration("20260427095559_InitialSqlCreate")]
-    partial class InitialSqlCreate
+    [Migration("20260427110948_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

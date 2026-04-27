@@ -43,13 +43,9 @@ builder.Services.AddAutoMapper(options =>
 });
 
 builder.Services.AddControllers();
-
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
-
 app.MapControllers();
-
 // Ge oss tillgång till MapApi Endpoints...
 app.MapGroup("api").MapIdentityApi<AppUser>();
 
