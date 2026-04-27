@@ -1,0 +1,202 @@
+[
+  {
+    "itemNumber": "202-1066",
+    "productName": "kolvstångscylinder, 3657868",
+    "imageUrl": "Kolvstång-1.jpg",
+    "price": 2502.3,
+    "description": "Pneumatisk kolvstångscylinder, 3657868 DSBC serien, Borrning 63 mm 125 mm, Dubbelverkandeeffektiv",
+    "type": "Piston rod cylinder",
+    "supplierId": "565300292c484620bbc3e210b2e8637b",
+    "itemsInStock": 38
+  },
+  {
+    "itemNumber": "594-611",
+    "productName": "kolvstångscylinder, 63MP2C032A0300",
+    "imageUrl": "Kolvstång-2.jpg",
+    "price": 1592.2,
+    "description": "Pneumatisk kolvstångscylinder, 63MP2C032A0300 63 serien, Borrning 32 mm 300 mm",
+    "type": "Piston rod cylinder",
+    "supplierId": "db2ae0dae64140689e5de6121ca46d27",
+    "itemsInStock": 32
+  },
+  {
+    "itemNumber": "613-210",
+    "productName": "kolvstångscylinder, 63MP2C032A0300",
+    "imageUrl": "Kolvstång-3.jpg",
+    "price": 3961.89,
+    "description": "Dubbelverkande cylinder 1500 mm, CG5EN63TFSV-250 CG5-S serien, Dubbelverkandeeffektiv",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "50df25363cfe4174868d8991f34f3fe3",
+    "itemsInStock": 18
+  },
+  {
+    "itemNumber": "220-3678",
+    "productName": "Ställdon utan stång Dubbelverkande",
+    "imageUrl": "Lintra-1.jpg",
+    "price": 7273.62,
+    "description": "Ställdon utan stång Dubbelverkande 600 mm 32 mm",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "23cb1e749d9b4955a4c4bc9af582abee",
+    "itemsInStock": 5
+  },
+  {
+    "itemNumber": "509-8030",
+    "productName": "Pneumatisk kompaktcylinder",
+    "imageUrl": "Compakt-1.jpg",
+    "price": 922.66,
+    "description": "Pneumatisk kompaktcylinder RM/92000/M serien, Borrning 25 mm 20 mm, Dubbelverkandeeffektiv",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "23cb1e749d9b4955a4c4bc9af582abee",
+    "itemsInStock": 8
+  },
+  {
+    "itemNumber": "509-8040",
+    "productName": "Rund cylinder",
+    "imageUrl": "round-1.jpg",
+    "price": 785.65,
+    "description": "Boring (mm): 20, 25, 32, 40, Slaglengte tot 300 mm, Dubbelwerkend, enkele zuigerstang",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "50df25363cfe4174868d8991f34f3fe3",
+    "itemsInStock": 3
+  },
+  {
+    "itemNumber": "509-8050",
+    "productName": "Pneumatisk kompaktcylinder",
+    "imageUrl": "C85.jpg",
+    "price": 1058.58,
+    "description": "C85-serien överensstämmer med ISO 6432 och CETOP RP52P. C85 finns i diametrarna 8 mm till 25 mm med standardslaglängder från 10 mm till 300 mm. En unik kolvstångspackningsdesign förhindrar att damm",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "50df25363cfe4174868d8991f34f3fe3",
+    "itemsInStock": 7
+  },
+  {
+    "itemNumber": "510-8010",
+    "productName": "CP96 Dubbelverkande kolvstångscylinder",
+    "imageUrl": "CP96.jpg",
+    "price": 2435.0,
+    "description": "CP96-C, ISO 15552-cylinder, dubbelverkande, standard/genomgående kolvstång med luftdämpning och anslagsdämpare.",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "50df25363cfe4174868d8991f34f3fe3",
+    "itemsInStock": 0
+  },
+  {
+    "itemNumber": "510-8011",
+    "productName": "CS1 Dubbelverkande kolvstångscylinder",
+    "imageUrl": "CS1.jpg",
+    "price": 922.66,
+    "description": "Serie CS1 luftcylinder är den cylinder från SMC som har störst diameter. Denna serie finns i diametrar upp till 12 och slaglängder upp till 60. Dessutom kan CS1 beställas med magnet för givare",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "50df25363cfe4174868d8991f34f3fe3",
+    "itemsInStock": 5
+  },
+  {
+    "itemNumber": "515-6001",
+    "productName": "10 mm solenoid valves model 3/2 STD",
+    "imageUrl": "10mm-solenoid.jpg",
+    "price": 690.0,
+    "description": "The 10 mm model 3/2 STD solenoid valves boast the most compact design on the market and offer a high flow/nozzle diameter ratio: they consist of a coil wound with class F (155°) enamelled copper wire, injection-moulded with glass-fibre reinforced polyamide technopolymer and an independent click-separable valve body. This patented construction solution allows the mechanical and electrical parts to be kept separate, guaranteeing greater robustness, reliability, consistent performance and production flexibility. The 3/2 STD model can be custom configured to meet specific operating requirements.",
+    "type": "Solenoid",
+    "supplierId": "09df89cee12648609d745a1dcb1e5f63",
+    "itemsInStock": 15
+  },
+  {
+    "itemNumber": "515-6002",
+    "productName": "10 mm solenoid valves model 2/2 HF",
+    "imageUrl": "10mm-solenoid-hf.jpg",
+    "price": 922.66,
+    "description": "Solenoid valves with very large orifices that guarantee very high flow rates in extremely compact dimensions. They are ideal for use in applications for controlling gases and fluids at low pressures. Monostable solenoid valve consists of an insulated copper wire class F (155°C) wound coil injection encapsulated with a glass fi ber reinforced polyamide polymer and an independent valve body “click” separable. This patented design solution allows to keep mechanical and electric parts separated guaranteeing greater rugginess, reliability, consistency of performance and fl exibility, making FIM competitive and the reference point on the market.",
+    "type": "Solenoid",
+    "supplierId": "09df89cee12648609d745a1dcb1e5f63",
+    "itemsInStock": 22
+  },
+  {
+    "itemNumber": "515-6003",
+    "productName": "15 mm solenoid valves model 3/2 STD",
+    "imageUrl": "15mm-solenoid.jpg",
+    "price": 922.66,
+    "description": "ISO:15218 compliant solenoid valve with multiple application possibilities due to its wide range of working pressures and adaptability to all functions: 2-way, 3-way, normally closed, normally open, selector or universal. Thanks to its special pneumatic interface, it adapts to the most common industrial standards and can replace most of the products on the market bringing with it all the quality and reliability of FIM. Monostable solenoid valve consists of an insulated copper wire class F (155°C) wound coil injection encapsulated with a glass fi ber reinforced polyamide polymer and an independent valve body “click” separable.",
+    "type": "Solenoid",
+    "supplierId": "09df89cee12648609d745a1dcb1e5f63",
+    "itemsInStock": 13
+  },
+  {
+    "itemNumber": "500-2010",
+    "productName": "Flow sensors Series FSX, 70-90",
+    "imageUrl": "Flow-sensor-1.jpg",
+    "price": 2640.48,
+    "description": "Series FSX is available for flow rates ranging from 20 to 2000 l/min (ANR), 50 to 5000 l/min (ANR) and from 100 to 10000 l/min (ANR), offered in two different sizes. The flow sensor includes also a pressure sensor, a temperature sensor and and an optional humidity sensor.",
+    "type": "Flödes sensorer",
+    "supplierId": "db2ae0dae64140689e5de6121ca46d27",
+    "itemsInStock": 11
+  },
+  {
+    "itemNumber": "500-2011",
+    "productName": "Flow sensors Series FS, sizes: 17, 30, 35",
+    "imageUrl": "Flow-sensor-2.jpg",
+    "price": 3001.75,
+    "description": "The Series FS is available for flows ranging from 0.5 to 2000 L/min, offered in three different sizes, also available with the pressure sensor version included. The display is designed to be rotatable, thus allowing for easy reading of the monitored values. The cumulative flow rate is immediately visible on the display.",
+    "type": "Flödes sensorer",
+    "supplierId": "db2ae0dae64140689e5de6121ca46d27",
+    "itemsInStock": 9
+  },
+  {
+    "itemNumber": "500-2012",
+    "productName": "Valves and solenoid valves Series D VA version",
+    "imageUrl": "solenoid-valves.jpg",
+    "price": 990.0,
+    "description": "Camozzi has developed a new series of valves for applications with limited installation space where it is necessary to have the control elements as close to the actuator as possible. Valves with threads on the body can be used individually or assembled on manifold. The sub-base version allows a better cleaning of the application. Thanks to the extreme robust aluminium body, the Series D valves guarantee maximum reliability even under difficult operating conditions.",
+    "type": "Solenoid valv",
+    "supplierId": "db2ae0dae64140689e5de6121ca46d27",
+    "itemsInStock": 6
+  },
+  {
+    "itemNumber": "500-2013",
+    "productName": "Rodless cylinders Series 50",
+    "imageUrl": "rodless-cylinder-50.jpg",
+    "price": 9450.5,
+    "description": "Series 50 rodless cylinders are available in 7 different diameters to cover as many applications as possible. A permanent magnet is assembled on the cylinder piston allowing the position to be detected by means of proximity switches positioned on the sliding axis. This series of cylinder is normally supplied with end-stroke cushioning, that can be regulated by means of a screw located on the end-cover.",
+    "type": "Dubbelverkande rodless cylinder",
+    "supplierId": "db2ae0dae64140689e5de6121ca46d27",
+    "itemsInStock": 1
+  },
+  {
+    "itemNumber": "500-2014",
+    "productName": "END LOCK cylinders Series 63",
+    "imageUrl": "endlock-cylinder-63.jpg",
+    "price": 12800.0,
+    "description": "END LOCK pneumatic cylinders are fitted with automatic mechanical end stroke locks which guarantee safe and secure holding of the cylinder rod in both the fully retracted and fully extended positions. The locks activate and release automatically, without the need for external signals or commands and cylinder END LOCK Series 63 comply with ISO 15552.",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "db2ae0dae64140689e5de6121ca46d27",
+    "itemsInStock": 0
+  },
+  {
+    "itemNumber": "220-6001",
+    "productName": "Olympian Plus micro fog lubricator, without yoke, metal bowl closed",
+    "imageUrl": "avskiljare-1.jpg",
+    "price": 2039.39,
+    "description": "Unique Olympian yoke Plug-In system offers perfect modularity Micro-fog lubricaton for best lubrication in general purpose pneumatic applications, fine mist perfect for long and more complex pipework Flow sensor provides a nearly constant oil/air ratio over a range of flows",
+    "type": "Avskiljare",
+    "supplierId": "23cb1e749d9b4955a4c4bc9af582abee",
+    "itemsInStock": 6
+  },
+  {
+    "itemNumber": "220-6002",
+    "productName": "Excelon Plus micro fog lubricator, G1/2, guarded plastic bowl closed",
+    "imageUrl": "avskiljare-1.jpg",
+    "price": 707.08,
+    "description": "Excelon Plus design allows in-line or modular installation Micro-fog lubricaton for best lubrication in general purpose pneumatic applications, fine mist perfect for long and more complex pipework Flow sensor provides a nearly constant oil/air ratio over a wide range of flows Reduced weight and size Double safety lock on bowl",
+    "type": "Avskiljare",
+    "supplierId": "23cb1e749d9b4955a4c4bc9af582abee",
+    "itemsInStock": 9
+  },
+  {
+    "itemNumber": "220-6003",
+    "productName": "ISO compact double acting cylinder, female thread, 32mm diameter, 10mm stroke",
+    "imageUrl": "compact-cylinder.jpg",
+    "price": 922.66,
+    "description": "Conforms to ISO 21287 Standard magnetic piston for full control system versatility Low friction, long life seals Switches can be mounted flush with the profile ",
+    "type": "Dubbelverkande cylinder",
+    "supplierId": "23cb1e749d9b4955a4c4bc9af582abee",
+    "itemsInStock": 45
+  }
+]
